@@ -66,10 +66,7 @@ internal class ToDoList
 * DisplayTasks method for print aall tasks in the list
 */
     public void DisplayTasks()
-    {
-        /*
-        print += ", Due Date: " + DueDate.ToString().PadRight(10) + ", Project: 
-         */
+    {      
         int num = 1;
         Console.WriteLine("Num".PadRight(4) + " Title".PadRight(10) + "Status".PadRight(10) + "Due Date ".PadRight(15) + "Project");
         foreach (var task in tasks)

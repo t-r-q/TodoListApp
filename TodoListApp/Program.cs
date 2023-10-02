@@ -1,6 +1,8 @@
 ﻿
 
 
+using System.Threading.Tasks;
+
 ToDoList toDoList = new ToDoList();
 toDoList.LoadDataFromFile();
 
@@ -10,14 +12,23 @@ bool isRunning = true;
 while (isRunning)
 {
     Console.WriteLine("*** Welcome to ToDoList App ***");
-    Console.WriteLine($"You have {toDoList.CountIncompleteTasks()} tasks to do and {toDoList.CountCompletedTasks()} tasks are done!");
+    Console.Write($"You have ");
+    Console.ForegroundColor = ConsoleColor.Cyan;
+    Console.Write($"{toDoList.CountIncompleteTasks()}");
+    Console.ResetColor();
+    Console.Write(" tasks to do and ");
+    Console.ForegroundColor = ConsoleColor.Blue;
+    Console.Write($"{toDoList.CountCompletedTasks()}");
+    Console.ResetColor();
+    Console.WriteLine(" tasks are done!");
+   // Console.WriteLine($"You have {toDoList.CountIncompleteTasks()} tasks to do and {toDoList.CountCompletedTasks()} tasks are done!");
+    Console.ResetColor();
     Console.WriteLine("Pick a number option between (1-4):");
     Console.WriteLine("1_ Show Task List (by date or project)");
     Console.WriteLine("2_ Add New Task");
     Console.WriteLine("3_ Edit Task (update, mark as done, remove)");
     Console.WriteLine("4_ Save and Exit");
     Console.WriteLine("-------------------------------------------");
-
     Console.Write("Enter your choice: ");
     string choice = Console.ReadLine();
 
@@ -141,8 +152,10 @@ void ShowTasksList()
     bool isShow = true;
     while (isShow)
     {
-        Console.WriteLine("1_ Show Task List by Date");
-        Console.WriteLine("2_ Show Task List by Project");
+        Console.Write("1_ Show Task List by ");
+        printToUser("Date.", "cy");
+        Console.Write("2_ Show Task List by ");
+        printToUser("Project.", "mg");
         Console.WriteLine("3_ Return to main page");
         Console.Write("Enter your choice(1,2,3): ");
         string choiceSort = Console.ReadLine();
@@ -168,12 +181,14 @@ void SortByProjectName()
 {
     toDoList.SortByProject();
     toDoList.DisplayTasks();
+    Console.WriteLine("");
 }
 
 void SortByDate()
 {
     toDoList.SortByDueDate();
     toDoList.DisplayTasks();
+    Console.WriteLine("");
 }
 
 void printToUser(string txt, string color)
@@ -181,7 +196,7 @@ void printToUser(string txt, string color)
     if (!string.IsNullOrEmpty(txt) && color == "red") {
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine(txt);
-        Console.WriteLine("        (X . X) ");
+        Console.WriteLine("      (X ..... X) ");
         Console.ResetColor();
 
     } else if (!string.IsNullOrEmpty(txt) && color == "green") {
@@ -194,8 +209,19 @@ void printToUser(string txt, string color)
         Console.WriteLine(txt);
         Console.ResetColor();
     }
+    else if (!string.IsNullOrEmpty(txt) && color == "cy")
+    {
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine(txt);
+        Console.ResetColor();
+    }
+    else if (!string.IsNullOrEmpty(txt) && color == "mg")
+    {
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.WriteLine(txt);
+        Console.ResetColor();
+    }
     else {
         Console.WriteLine(txt);
-    }
-
+    }   
 }
